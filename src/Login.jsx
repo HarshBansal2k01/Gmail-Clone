@@ -3,6 +3,7 @@ import React from "react";
 import "./Login.css";
 import { auth, provider } from "./firebase";
 import { useDispatch } from "react-redux";
+import {login} from "./features/userSlice";
 
 function Login() {
   const dispatch = useDispatch();
@@ -10,8 +11,8 @@ function Login() {
     auth
       .signInWithPopup(provider)
       .then(({ user }) => {
-        dispatchEvent(
-          Login({
+        dispatch(
+          login({
             displaName: user.displayName,
             email: user.email,
             photoUrl: user.photoURL,

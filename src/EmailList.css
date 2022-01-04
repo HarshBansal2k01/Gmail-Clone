@@ -6,10 +6,15 @@
     display: none;
 }
 
+.emailList{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 .emailList__settings{
     position: sticky;
     top: 0;
-    display: f lex;
+    display: flex;
     justify-content: space-between;
     border-bottom: 1px solid whitesmoke;
     background-color: white;
