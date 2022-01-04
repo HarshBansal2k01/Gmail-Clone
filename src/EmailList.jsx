@@ -13,7 +13,27 @@ import { Checkbox, IconButton } from "@material-ui/core";
 import Section from "./Section";
 import "./EmailList.css";
 import EmailRow from "./EmailRow";
+import { useEffect } from "react";
+import { useState } from "react";
+import { db } from "./firebase";
 function EmailList() {
+  //storing variables
+  const [emails, setEmails] = useState([]);
+
+  //mapping-: react hooks
+  useEffect(() => {
+    db.collection("emails")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setEmails(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+  });
+
   return (
     <div className="emailList">
       <div className="emailList__settings">
@@ -51,6 +71,88 @@ function EmailList() {
       </div>
 
       <div className="emailList__list">
+        {emails.map(({id, data: {to, subject, message, timestamp }}) =>(
+          <EmailRow
+            id = {id}
+            key = {id}
+            title={to}
+            subject={subject}
+            description={message}
+            time = {new Date(timestamp?.seconds *1000).toUTCString()}
+          />
+        ))}
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test 2 to check for text overflow and nowrap"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test 2 to check for text overflow and nowrap"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test 2 to check for text overflow and nowrap"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test 2 to check for text overflow and nowrap"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test 2 to check for text overflow and nowrap"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test"
+          time="10am"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Hey Fellow streamer!!!"
+          description="This is a test 2 to check for text overflow and nowrap"
+          time="10am"
+        />
         <EmailRow
           title="Twitch"
           subject="Hey Fellow streamer!!!"
